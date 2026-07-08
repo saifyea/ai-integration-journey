@@ -1,3 +1,44 @@
+"""
+ System prompt দিয়ে তুমি AI-কে একটা role/personality দাও। এটা conversation শুরুর আগেই সেট করা হয়।
+
+ AI কে একটা specific role দেওয়া
+যেমন: "তুমি একজন বাংলাদেশী marketing expert"
+
+Prompt Techniques
+১. Zero-shot  → সরাসরি জিজ্ঞেস করা, কোনো example ছাড়া
+example:
+prompt = "একটা ভালো product description লিখো Bangladesh Map Puzzle এর জন্য"
+
+২. Few-shot   → উদাহরণ দিয়ে জিজ্ঞেস করো
+example:    
+prompt = """
+#এই স্টাইলে product description লিখো:
+
+#Example:
+#Product: Alphabet Blocks
+#Description: শিশুদের জন্য মজার শেখার খেলনা! রঙিন ব্লক দিয়ে A-Z শিখুন সহজে।
+
+#এখন লিখো:
+#Product: Bangladesh Map Puzzle
+#Description:
+"""
+
+৩. Chain of Thought → step by step ভাবতে বলো
+example:
+prompt = "আমার পণ্যের দাম ৩০০ টাকা, কিন্তু প্রতিযোগী বিক্রি করছে ২৫০ টাকায়। step by step ভেবে বলো আমি কী করব।"
+৪. Role Play  → AI কে role দাও
+example:
+prompt = "তুমি একজন বিখ্যাত copywriter, তোমার caption সবসময় viral হয়। আমার Bangladesh Map Puzzle এর জন্য একটা Facebook ad caption লিখে দাও।"
+
+Parameters Control
+temperature  → AI কতটা creative হবে
+example: temperature=0.7 → বেশি creative, temperature=0.1 → কম creative
+max_tokens   → উত্তর কতটা লম্বা হবে
+example: max_tokens=200 → ২০০ token পর্যন্ত উত্তর, max_tokens=50 → ৫০ token পর্যন্ত উত্তর
+
+"""
+
+
 import anthropic
 client=anthropic.Anthropic(api_key="ANTHROPIC_API_KEY")
 

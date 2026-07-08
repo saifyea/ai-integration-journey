@@ -1,3 +1,17 @@
 # requests library দিয়ে আমরা internet থেকে data আনতে পারি!
 pip install requests    #if any erro comes then below one
 python -m pip install requests
+
+#anthropic Library Install করো
+python -m pip install anthropic
+
+ python-dotenv install করো
+ python -m pip install python-dotenv
+ 
+ .env file a 
+ ANTHROPIC_API_KEY=sk-ant-api03-তোমার-আসল-key
+
+LangChain install ও setup
+python -m pip install langchain
+python -m pip install langchain-anthropic
+python -m pip install langchain-core
