@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QBM — Quranic Business Model | Coach Kanchon Academy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: { DEFAULT: '#C9A84C', light: '#E8D5A0', dark: '#8B7433', muted: '#6B5A2E' },
+            bg: { DEFAULT: '#0B0B09', card: '#141412', elevated: '#1C1C19' },
+            txt: { DEFAULT: '#EDE8DC', muted: '#9E9889', dim: '#5E5A52' },
+            forest: '#2D6A4F'
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            body: ['"Hind Siliguri"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8D5A0;
+      --gold-dark: #8B7433;
+      --bg: #0B0B09;
+      --card: #141412;
+      --txt: #EDE8DC;
+      --muted: #9E9889;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse at 10% 10%, rgba(201,168,76,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 90%, rgba(201,168,76,0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 40%, rgba(45,106,79,0.03) 0%, transparent 60%);
+      font-family: 'Hind Siliguri', sans-serif;
+      color: var(--txt);
+      overflow-x: hidden;
+    }
+
+    /* সূক্ষ্ম ডট প্যাটার্ন ওভারলে */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(201,168,76,0.06) 0.8px, transparent 0.8px);
+      background-size: 36px 36px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    main, header, footer { position: relative; z-index: 1; }
+
+    /* গোল্ড শিমার অ্যানিমেশন */
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .gold-shimmer {
+      background: linear-gradient(90deg, #C9A84C 0%, #F0E2A8 30%, #C9A84C 50%, #F0E2A8 70%, #C9A84C 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 5s linear infinite;
+    }
+
+    /* ধীরে ঘূর্ণায়মান জ্যামিতিক প্যাটার্ন */
+    @keyframes slowSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .geo-spin { animation: slowSpin 90s linear infinite; }
+
+    /* ফেড-ইন অ্যানিমেশন */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
+    .reveal-delay-5 { transition-delay: 0.40s; }
+    .reveal-delay-6 { transition-delay: 0.48s; }
+
+    /* অর্নামেন্টাল ডিভাইডার */
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 3rem auto;
+      max-width: 320px;
+    }
+    .ornament::before, .ornament::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    .ornament-diamond {
+      width: 7px; height: 7px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* পিলার কার্ড */
+    .pillar-card {
+      background: linear-gradient(135deg, var(--card) 0%, #111110 100%);
+      border: 1px solid rgba(201,168,76,0.1);
+      border-left: 3px solid var(--gold);
+      border-radius: 6px;
+      padding: 1.5rem;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pillar-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(201,168,76,0.3);
+      box-shadow: 0 8px 30px rgba(201,168,76,0.08);
+    }
+
+    /* পিলার নম্বর ব্যাজ */
+    .pillar-num {
+      width: 32px; height: 32px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* বুলেট পয়েন্ট */
+    .bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 4px 0;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .bullet-item .b-dot {
+      width: 5px; height: 5px;
+      min-width: 5px;
+      background: var(--gold-dark);
+      border-radius: 50%;
+      margin-top: 7px;
+    }
+    .bullet-item strong { color: var(--gold-light); font-weight: 600; }
+
+    /* কোট বক্স */
+    .quote-box {
+      background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, rgba(201,168,76,0.02) 100%);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 8px;
+      padding: 1.75rem 2rem;
+      position: relative;
+    }
+    .quote-box::before {
+      content: '\201C';
+      position: absolute;
+      top: -8px; left: 16px;
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      color: var(--gold);
+      opacity: 0.3;
+      line-height: 1;
+    }
+
+    /* কম্পারিজন টেবিল */
+    .cmp-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.85rem;
+    }
+    .cmp-table thead th {
+      background: rgba(201,168,76,0.12);
+      color: var(--gold-light);
+      font-weight: 600;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .cmp-table thead th:first-child { border-radius: 6px 0 0 0; }
+    .cmp-table thead th:last-child { border-radius: 0 6px 0 0; }
+    .cmp-table tbody td {
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--muted);
+    }
+    .cmp-table tbody tr:last-child td { border-bottom: none; }
+    .cmp-table tbody tr:last-child td:first-child { border-radius: 0 0 0 6px; }
+    .cmp-table tbody tr:last-child td:last-child { border-radius: 0 0 6px 0; }
+    .cmp-table .qbm-cell {
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+    .cmp-table tbody tr {
+      transition: background 0.25s ease;
+    }
+    .cmp-table tbody tr:hover {
+      background: rgba(201,168,76,0.04);
+    }
+
+    /* স্ট্যাট পিল */
+    .stat-pill {
+      background: rgba(201,168,76,0.06);
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: 8px;
+      padding: 14px 18px;
+      text-align: center;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+    .stat-pill:hover {
+      border-color: rgba(201,168,76,0.3);
+      background: rgba(201,168,76,0.1);
+    }
+
+    /* প্যারাডক্স বক্স */
+    .paradox-box {
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .paradox-conventional {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .paradox-qbm {
+      background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, rgba(45,106,79,0.06) 100%);
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+
+    /* সূরা রেফারেন্স ব্যাজ */
+    .surah-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.78rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ক্লোজিং সেকশন */
+    .closing-frame {
+      border: 2px solid rgba(201,168,76,0.25);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      background: linear-gradient(180deg, rgba(201,168,76,0.04) 0%, rgba(201,168,76,0.01) 100%);
+      position: relative;
+    }
+    .closing-frame::before,
+    .closing-frame::after {
+      content: '';
+      position: absolute;
+      width: 20px; height: 20px;
+      border-color: var(--gold);
+      border-style: solid;
+    }
+    .closing-frame::before {
+      top: -1px; left: -1px;
+      border-width: 2px 0 0 2px;
+      border-radius: 12px 0 0 0;
+    }
+    .closing-frame::after {
+      bottom: -1px; right: -1px;
+      border-width: 0 2px 2px 0;
+      border-radius: 0 0 12px 0;
+    }
+
+    /* ফুটার লাইন */
+    .footer-line {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
+    }
+
+    /* পালস অ্যানিমেশন */
+    @keyframes pulse-gold {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+    .pulse-gold { animation: pulse-gold 3s ease-in-out infinite; }
+
+    /* ভাসমান অ্যানিমেশন */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .float-anim { animation: float 6s ease-in-out infinite; }
+
+    /* রেসপন্সিভ টেবিল র‍্যাপার */
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 8px;
+      border: 1px solid rgba(201,168,76,0.1);
+    }
+
+    /* রিডিউসড মোশন */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* স্মল স্ক্রিন অ্যাডজাস্টমেন্ট */
+    @media (max-width: 640px) {
+      .pillar-card { padding: 1.15rem; }
+      .quote-box { padding: 1.25rem 1.15rem; }
+      .closing-frame { padding: 1.75rem 1.15rem; }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen">
+
+  <!-- ===== হেডার / হিরো সেকশন ===== -->
+  <header class="relative pt-10 pb-6 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto text-center">
+
+      <!-- শীর্ষ অলংকরণ লাইন -->
+      <div class="flex items-center justify-center gap-3 mb-8 reveal">
+        <span class="block w-16 h-px bg-gradient-to-r from-transparent to-gold-dark"></span>
+        <span class="block w-2 h-2 bg-gold rotate-45"></span>
+        <span class="block w-16 h-px bg-gradient-to-l from-transparent to-gold-dark"></span>
+      </div>
+
+      <!-- ভেন্ডর ব্যাজ -->
+      <div class="reveal reveal-delay-1 mb-6">
+        <span class="inline-flex items-center gap-2 bg-gold/10 border border-gold/20 rounded-full px-4 py-1.5 text-xs font-semibold text-gold tracking-wide uppercase">
+          <i class="fa-solid fa-graduation-cap text-[10px]"></i>
+          Coach Kanchon Academy — ২ দিনের ফ্রি লাইভ মাস্টারক্লাস
+        </span>
+      </div>
+
+      <!-- মূল শিরোনাম -->
+      <h1 class="font-display font-900 text-7xl sm:text-8xl md:text-9xl tracking-tight leading-none mb-3 reveal reveal-delay-2 gold-shimmer">
+        QBM
+      </h1>
+      <p class="font-display text-xl sm:text-2xl text-gold-light/80 font-400 italic mb-2 reveal reveal-delay-3">
+        Quranic Business Model
+      </p>
+      <p class="text-txt/60 text-sm sm:text-base max-w-xl mx-auto leading-relaxed reveal reveal-delay-4">
+        ব্যবসা একটি ইবাদত — আল্লাহর দেওয়া ব্লুপ্রিন্ট, যেকোনো MBA ফ্রেমওয়ার্কের চেয়ে শ্রেষ্ঠ।
+      </p>
+
+      <!-- পরিসংখ্যান পিল -->
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mt-10 reveal reveal-delay-5">
+        <div class="stat-pill">
+          <div class="font-display font-700 text-2xl text-gold-light counter" data-target="1">০</div>
+          <div class="text-txt/40 text-xs mt-1">পেজ ফ্রেমওয়ার্ক</div>
+        </div>
+        <div class="stat-pill">
+          <div class="font-display font-700 text-2xl text-gold-light counter" data-target="7">০</div>
+          <div class="text-txt/40 text-xs mt-1">মূল স্তম্ভ</div>
+        </div>
+        <div class="stat-pill">
+          <div class="font-display font-700 text-2xl text-gold-light counter" data-target="28">০</div>
+          <div class="text-txt/40 text-xs mt-1">স্তর (Layer)</div>
+        </div>
+        <div class="stat-pill">
+          <div class="font-display font-700 text-2xl text-gold-light counter" data-target="1400">০</div>
+          <div class="text-txt/40 text-xs mt-1">বছর পরীক্ষিত</div>
+        </div>
+        <div class="stat-pill col-span-2 sm:col-span-1">
+          <div class="font-display font-700 text-2xl text-gold-light"><span class="counter" data-target="700">০</span>&times;</div>
+          <div class="text-txt/40 text-xs mt-1">গ্যারান্টিযুক্ত ROI</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="px-4 sm:px-6 pb-16">
+    <div class="max-w-5xl mx-auto">
+
+      <!-- ===== ভিত্তি সেকশন ===== -->
+      <section class="mt-6">
+        <div class="ornament reveal"><span class="ornament-diamond"></span></div>
+
+        <h2 class="font-display font-700 text-2xl sm:text-3xl text-center text-gold-light mb-6 reveal">QBM-এর ভিত্তি</h2>
+
+        <!-- সূরা রেফারেন্স -->
+        <div class="text-center mb-5 reveal reveal-delay-1">
+          <span class="surah-badge">
+            <i class="fa-solid fa-book-quran text-[11px]"></i>
+            সূরা আত-তালাক (৬৫): ২-৩
+          </span>
+        </div>
+
+        <!-- কুরআনের আয়াত -->
+        <div class="quote-box max-w-3xl mx-auto mb-8 reveal reveal-delay-2">
+          <p class="text-txt/90 text-base sm:text-lg leading-relaxed pl-4">
+            যে আল্লাহকে ভয় করে, আল্লাহ তার জন্য সংকট থেকে বেরিয়ে আসার পথ তৈরি করেন এবং তাকে অকল্পনীয় উৎস থেকে রিযিক দেন।
+          </p>
+        </div>
+
+        <!-- বিরোধাভাস -->
+        <div class="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+          <div class="paradox-box paradox-conventional reveal reveal-delay-3">
+            <div class="text-xs font-semibold text-txt/40 uppercase tracking-wider mb-2">
+              <i class="fa-solid fa-xmark text-red-400/60 mr-1"></i> প্রচলিত বিজনেস মডেল
+            </div>
+            <p class="text-txt/70">সফলতা বনাম ব্যর্থতার লড়াই</p>
+          </div>
+          <div class="paradox-box paradox-qbm reveal reveal-delay-4">
+            <div class="text-xs font-semibold text-gold/80 uppercase tracking-wider mb-2">
+              <i class="fa-solid fa-check text-forest mr-1"></i> QBM পদ্ধতি
+            </div>
+            <p class="text-gold-light/90">আল্লাহর ওপর ভরসা = প্রকৃত সাফল্য</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ৭টি মূল স্তম্ভ ===== -->
+      <section class="mt-4">
+        <div class="ornament reveal"><span class="ornament-diamond"></span></div>
+
+        <h2 class="font-display font-700 text-2xl sm:text-3xl text-center text-gold-light mb-2 reveal">৭টি মূল স্তম্ভ</h2>
+        <p class="text-center text-txt/40 text-sm mb-10 reveal reveal-delay-1">৭টি স্তম্ভ, ২৮টি স্তর — একটি পূর্ণাঙ্গ ঐশ্বরিক ব্যবসায়িক কাঠামো</p>
+
+        <!-- পিলার গ্রিড -->
+        <div class="grid sm:grid-cols-2 gap-4">
+
+          <!-- ১ম স্তম্ভ -->
+          <div class="pillar-card reveal">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="pillar-num">১</span>
+              <div>
+                <h3 class="font-display font-700 text-lg text-gold-light leading-tight">Core Identity</h3>
+                <p class="text-xs text-txt/40">Divine Hierarchy</p>
+              </div>
+            </div>
+            <p class="text-xs text-gold-dark italic mb-3">আসলে কে আপনার ব্যবসার মালিক?</p>
+            <div class="space-y-1">
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Al-Malik</strong> — আল্লাহ। সব সম্পদ, আইডিয়া, মার্কেট তাঁরই।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Khalifah</strong> — আপনি মালিক নন, মোতাওয়াল্লি (ব্যবস্থাপক)।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Amanah</strong> — টিম, কাস্টমার, পুঁজি সব আমানত।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Maqasid</strong> — সাফল্য = ফালাহ (দুনিয়া ও আখিরাতে সমৃদ্ধি)।</span></div>
+            </div>
+            <div class="mt-3 pt-3 border-t border-white/5 text-xs text-txt/40 italic">
+              "আমি আল্লাহর পক্ষে পরিচালনা করছি" → শান্তি ও দীর্ঘমেয়াদী চিন্তা।
+            </div>
+          </div>
+
+          <!-- ২য় স্তম্ভ -->
+          <div class="pillar-card reveal reveal-delay-1">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="pillar-num">২</span>
+              <div>
+                <h3 class="font-display font-700 text-lg text-gold-light leading-tight">Strategic Plan</h3>
+                <p class="text-xs text-txt/40">Spiritual Operating System (SOS)</p>
+              </div>
+            </div>
+            <p class="text-xs text-gold-dark italic mb-3">৪টি Divine Business Strategy</p>
+            <div class="space-y-1">
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Niyyah</strong> — ইনটেনশনই সব ফলাফলের ইঞ্জিন।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Taqwa</strong> — রিস্ক ম্যানেজমেন্ট। প্রতিযোগীরা পণ্য কপি করতে পারে, তাকওয়া কপি করতে পারে না।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Shukr</strong> — গ্রোথ স্ট্র্যাটেজি। "শুকর আদায় করলে আমি বাড়িয়ে দেব।" (১৪:৭)</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Istighfar</strong> — ক্রাইসিস ম্যানেজমেন্ট। ব্যবসার রিসেট বাটন।</span></div>
+            </div>
+          </div>
+
+          <!-- ৩য় স্তম্ভ -->
+          <div class="pillar-card reveal reveal-delay-2">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="pillar-num">৩</span>
+              <div>
+                <h3 class="font-display font-700 text-lg text-gold-light leading-tight">The Scale Engine</h3>
+                <p class="text-xs text-txt/40">Barakah-Driven Economics</p>
+              </div>
+            </div>
+            <p class="text-xs text-gold-dark italic mb-3">প্রাচুর্য, অবদান, গুণন — স্বল্পতার অর্থনীতি নয়</p>
+            <div class="space-y-1">
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Halal Finance</strong> — সুদমুক্ত অর্থায়ন। সুদ দেউলিয়াত্বের দিকে নিয়ে যায়।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Zakat & Sadaqah</strong> — রিযিক গুণনের সূত্র। ন্যূনতম গ্যারান্টিযুক্ত ROI: ৭০০&times;।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Yusuf (AS) Formula</strong> — ৭ বছর সঞ্চয়, ৭ বছর ব্যয়। ন্যূনতম ৬ মাসের রিজার্ভ।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Tawakkul</strong> — উট বাঁধো, তারপর তাওয়াক্কুল করো।</span></div>
+            </div>
+            <div class="mt-3 pt-3 border-t border-white/5 text-xs text-gold-dark font-mono">
+              (Profit + Impact + Barakah) &divide; Investment = Falah
+            </div>
+          </div>
+
+          <!-- ৪র্থ স্তম্ভ -->
+          <div class="pillar-card reveal reveal-delay-3">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="pillar-num">৪</span>
+              <div>
+                <h3 class="font-display font-700 text-lg text-gold-light leading-tight">Business Operations</h3>
+                <p class="text-xs text-txt/40">The Prophetic Way — Al-Amin Branding</p>
+              </div>
+            </div>
+            <p class="text-xs text-gold-dark italic mb-3">ট্রাস্ট এখন ১ নম্বর ক্রয়চালক</p>
+            <div class="space-y-1">
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Radical Transparency</strong> — পণ্যের দুর্বলতা আগেই জানিয়ে দিন। অধিগ্রহণ খরচ ৮০% কমায়।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>জিতাও Philosophy</strong> — প্রতিটি লেনদেনে উভয়পক্ষ লাভবান হবে।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Khadijah (RA) Model</strong> — দক্ষতা নয়, চরিত্র দেখে হায়ার করুন।</span></div>
+            </div>
+            <div class="mt-3 pt-3 border-t border-white/5 text-xs text-txt/40 italic">
+              Word-of-Mouth রেটই আপনার Al-Amin স্কোর।
+            </div>
+          </div>
+
+          <!-- ৫ম স্তম্ভ -->
+          <div class="pillar-card reveal reveal-delay-4">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="pillar-num">৫</span>
+              <div>
+                <h3 class="font-display font-700 text-lg text-gold-light leading-tight">Marketing Architecture</h3>
+                <p class="text-xs text-txt/40">Divine Persuasion</p>
+              </div>
+            </div>
+            <p class="text-xs text-gold-dark italic mb-3">মার্কেটিংয়ের ৪টি স্তর</p>
+            <div class="space-y-1">
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Neuropsychology</strong> — ৩টি মাস্টার ট্রিগার: ভয় (Reptilian), আশা (Limbic), যুক্তি (Neocortex)।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Quranic Content</strong> — গল্প তথ্যের চেয়ে ২২ গুণ বেশি মনে থাকে।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Dawah Mechanism</strong> — প্রতিটি সন্তুষ্ট কাস্টমার = একটি ডিস্ট্রিবিউশন চ্যানেল।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Marketing Ethics</strong> — নো-হাইপ বাউন্ডারি। মিথ্যা প্রতিশ্রুতি নয়।</span></div>
+            </div>
+          </div>
+
+          <!-- ৬ষ্ঠ স্তম্ভ -->
+          <div class="pillar-card reveal reveal-delay-5">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="pillar-num">৬</span>
+              <div>
+                <h3 class="font-display font-700 text-lg text-gold-light leading-tight">Productive Protocol</h3>
+                <p class="text-xs text-txt/40">Divine Rhythm</p>
+              </div>
+            </div>
+            <p class="text-xs text-gold-dark italic mb-3">উৎপাদনশীলতার ৪টি স্তর</p>
+            <div class="space-y-1">
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Prayer, Peers & Peace</strong> — সালাত = ৫টি মিটিং। উদ্বেগ ৬৮% কমায় (Harvard)।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Energy Management</strong> — Qaylulah (বিকেলের ঘুম) পারফরম্যান্স ৩৪% বাড়ায় (NASA)।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Dua & Visualization</strong> — লক্ষ্য নির্ধারণ ও দোয়ার সংমিশ্রণ।</span></div>
+              <div class="bullet-item"><span class="b-dot"></span><span><strong>Muhasaba</strong> — নিজের হিসাব নিজেই নিন প্রতিদিন।</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ৭ম স্তম্ভ — ফুল উইডথ -->
+        <div class="pillar-card mt-4 reveal reveal-delay-6" style="border-left-color: #2D6A4F;">
+          <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+            <div class="flex items-center gap-3 sm:min-w-[200px]">
+              <span class="pillar-num" style="border-color: #2D6A4F; color: #4ADE80;">৭</span>
+              <div>
+                <h3 class="font-display font-700 text-lg text-gold-light leading-tight">Exit Strategy</h3>
+                <p class="text-xs text-forest">The Eternal Exit</p>
+              </div>
+            </div>
+            <div class="flex-1 grid sm:grid-cols-2 gap-x-8 gap-y-1">
+              <div class="bullet-item"><span class="b-dot" style="background:#2D6A4F;"></span><span><strong>Sadaqah Jariyah</strong> — মৃত্যুর পরেও চলতে থাকা charity। চিরন্তন রেভিনিউ স্ট্রিম।</span></div>
+              <div class="bullet-item"><span class="b-dot" style="background:#2D6A4F;"></span><span><strong>Waqf Architecture</strong> — Automatic Legacy। সম্পদ চিরতরে কল্যাণে নিয়োজিত।</span></div>
+              <div class="bullet-item"><span class="b-dot" style="background:#2D6A4F;"></span><span><strong>Qualified Heirs</strong> — মূল্যবোধ হস্তান্তর, শুধু equity নয়।</span></div>
+              <div class="bullet-item"><span class="b-dot" style="background:#2D6A4F;"></span><span><strong>Final Audit</strong> — ৫ প্রশ্ন: কী নামে? কার জন্য? কীভাবে? Impact? Legacy?</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== তুলনা টেবিল ===== -->
+      <section class="mt-4">
+        <div class="ornament reveal"><span class="ornament-diamond"></span></div>
+
+        <h2 class="font-display font-700 text-2xl sm:text-3xl text-center text-gold-light mb-8 reveal">
+          QBM বনাম প্রচলিত Business Model
+        </h2>
+
+        <div class="table-wrap reveal reveal-delay-1">
+          <table class="cmp-table">
+            <thead>
+              <tr>
+                <th style="width:28%;">বিষয়</th>
+                <th style="width:36%;">প্রচলিত মডেল</th>
+                <th style="width:36%; background: rgba(201,168,76,0.08);">QBM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-semibold text-txt/70">মালিক কে?</td>
+                <td>Founder</td>
+                <td class="qbm-cell">Allah — আপনি Khalifah</td>
+              </tr>
+              <tr>
+                <td class="font-semibold text-txt/70">কেন আছেন?</td>
+                <td>Profit</td>
+                <td class="qbm-cell">Falah (দুনিয়া + আখিরাত)</td>
+              </tr>
+              <tr>
+                <td class="font-semibold text-txt/70">সময় দিগন্ত</td>
+                <td>৫ বছর</td>
+                <td class="qbm-cell">আজীবন + অনন্তকাল</td>
+              </tr>
+              <tr>
+                <td class="font-semibold text-txt/70">নীতির উৎস</td>
+                <td>আইন ও বিধিমালা</td>
+                <td class="qbm-cell">ঐশ্বরিক জবাবদিহিতা</td>
+              </tr>
+              <tr>
+                <td class="font-semibold text-txt/70">ক্রাইসিস রেসপন্স</td>
+                <td>কনসালট্যান্ট</td>
+                <td class="qbm-cell">Istighfar + Tawakkul</td>
+              </tr>
+              <tr>
+                <td class="font-semibold text-txt/70">সাফল্যের মাপকাঠি</td>
+                <td>রেভিনিউ</td>
+                <td class="qbm-cell">Falah</td>
+              </tr>
+              <tr>
+                <td class="font-semibold text-txt/70">মৃত্যুর পরে রিটার্ন</td>
+                <td>শূন্য</td>
+                <td class="qbm-cell" style="font-size:1.1rem; color: #4ADE80;">&#8734; অসীম</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== মূল বার্তা / ক্লোজিং ===== -->
+      <section class="mt-4">
+        <div class="ornament reveal"><span class="ornament-diamond"></span></div>
+
+        <div class="closing-frame max-w-3xl mx-auto text-center reveal reveal-delay-1">
+          <p class="font-display text-2xl sm:text-3xl font-700 text-gold-light leading-snug mb-5">
+            "আপনার ব্যবসা একটি ইবাদত।"
+          </p>
+          <div class="w-12 h-px bg-gold/40 mx-auto mb-5"></div>
+          <p class="text-txt/70 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
+            আপনি শেয়ারহোল্ডারের মূল্য সর্বোচ্চ করতে সৃষ্টি হননি।
+            আপনি আল্লাহর ইবাদত করতে সৃষ্টি হয়েছেন —
+            আর QBM-এ গড়া ব্যবসা সেই ইবাদতেরই সবচেয়ে শক্তিশালী রূপ।
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ===== ফুটার ===== -->
+  <footer class="px-4 sm:px-6 pb-10">
+    <div class="max-w-5xl mx-auto">
+      <div class="footer-line mb-6"></div>
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-txt/30">
+        <span class="font-display text-sm text-gold-dark/60">Coach Kanchon Academy</span>
+        <span>Quranic Business Model — 2 Day Free Live Masterclass</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== ডেকোরেটিভ জ্যামিতিক উপাদান ===== -->
+  <div class="fixed top-20 -left-32 w-64 h-64 opacity-[0.03] pointer-events-none geo-spin" aria-hidden="true">
+    <svg viewBox="0 0 200 200" fill="none" stroke="#C9A84C" stroke-width="0.8">
+      <polygon points="100,10 116,62 170,36 142,88 194,100 142,112 170,164 116,138 100,190 84,138 30,164 58,112 6,100 58,88 30,36 84,62"/>
+      <polygon points="100,40 110,70 142,56 128,84 160,100 128,116 142,144 110,130 100,160 90,130 58,144 72,116 40,100 72,84 58,56 90,70"/>
+    </svg>
+  </div>
+  <div class="fixed bottom-20 -right-24 w-48 h-48 opacity-[0.025] pointer-events-none geo-spin" style="animation-direction: reverse; animation-duration: 120s;" aria-hidden="true">
+    <svg viewBox="0 0 200 200" fill="none" stroke="#C9A84C" stroke-width="0.8">
+      <polygon points="100,10 116,62 170,36 142,88 194,100 142,112 170,164 116,138 100,190 84,138 30,164 58,112 6,100 58,88 30,36 84,62"/>
+    </svg>
+  </div>
+
+  <script>
+    /* ===== স্ক্রল-ট্রিগার্ড রিভিল অ্যানিমেশন ===== */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ===== বাংলা সংখ্যায় কাউন্টার অ্যানিমেশন ===== */
+    const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+
+    function toBangla(num) {
+      return String(num).replace(/[0-9]/g, d => banglaDigits[parseInt(d)]);
+    }
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.animated) {
+          entry.target.dataset.animated = 'true';
+          const target = parseInt(entry.target.dataset.target);
+          const duration = 1800;
+          const startTime = performance.now();
+
+          function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // ইজ-আউট কিউবিক ইজিং
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.round(eased * target);
+            entry.target.textContent = toBangla(current);
+
+            if (progress < 1) {
+              requestAnimationFrame(update);
+            } else {
+              entry.target.textContent = toBangla(target);
+            }
+          }
+          requestAnimationFrame(update);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+    /* ===== সূক্ষ্ম প্যারাল্যাক্স ইফেক্ট (ডেকোরেটিভ উপাদানে) ===== */
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const geoElements = document.querySelectorAll('.geo-spin');
+          geoElements.forEach((el, i) => {
+            const direction = i === 0 ? 1 : -1;
+            el.style.transform = `translateY(${scrollY * 0.05 * direction}px) rotate(${scrollY * 0.02 * direction}deg)`;
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

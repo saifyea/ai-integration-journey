@@ -1,0 +1,3 @@
+# requests library দিয়ে আমরা internet থেকে data আনতে পারি!
+pip install requests    #if any erro comes then below one
+python -m pip install requests
