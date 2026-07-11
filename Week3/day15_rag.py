@@ -67,33 +67,9 @@ questions = [
     "Magic Drawing Board এর বিশেষত্ব কী?",
     "ডেলিভারি কোথায় পাওয়া যায়?"
 ]
-"""
+
 for question in questions:
     print(f"\n❓ {question}")
     answer = ask(question)
     print(f"✅ {answer}")
-    print("─" * 40)"""
-
-# Interactive Q&A — user নিজে প্রশ্ন করবে
-print("\n🤖 Saif's Kids Store — Interactive Assistant")
-print("'quit' লিখলে বন্ধ হবে")
-print("─" * 40)
-
-while True:
-    question = input("\n❓ তোমার প্রশ্ন: ")
-
-    if question.lower() == "quit":
-        print("আল্লাহ হাফেজ! 👋")
-        break
-
-    if question.strip() == "":
-        print("কিছু লেখো!")
-        continue
-
-    try:
-        answer = ask(question)
-        print(f"\n✅ উত্তর: {answer}")
-        print("─" * 40)
-
-    except Exception as e:
-        print(f"❌ Error: {e}")
+    print("─" * 40)
