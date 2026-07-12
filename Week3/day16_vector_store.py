@@ -117,22 +117,6 @@ def ask_with_score(question):
     print("─" * 50)
 
 
-def load_multiple_docs():
-    # একাধিক file load করো
-    files = [
-        "product_catalog.txt",
-        "store_policy.txt",    # নতুন file বানাবো
-    ]
-
-    all_docs = []
-    for file in files:
-        if os.path.exists(file):
-            loader = TextLoader(file, encoding="utf-8")
-            docs = loader.load()
-            all_docs.extend(docs)
-            print(f"✅ Loaded: {file}")
-
-    return all_docs
 
 
 # Test questions with score
