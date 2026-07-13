@@ -58,14 +58,12 @@ if os.path.exists(VECTOR_STORE_PATH):
 else:
     vectorstore = build_vectorstore()
 
-
 def ask_question(question):
     model = ChatAnthropic(  model="claude-haiku-4-5-20251001", api_key=os.getenv("ANTHROPIC_API_KEY"))
     docs = vectorstore.similarity_search(question, k=3)
     context=""
     for doc in docs:
-       # print(f" {doc.page_content[:60]}...")
-        context+=doc.page_content+"\n"
+         context+=doc.page_content+"\n"
 
     prompt = f"""বাংলায় সংক্ষেপে নিচের তথ্য দিয়ে প্রশ্নের উত্তর দাও।
             তথ্য: {context}
@@ -75,40 +73,13 @@ def ask_question(question):
     response = model.invoke(prompt)
     print(f"✅ উত্তর: {response.content}")
     print("─" * 50)
-
-
+   
 questions = [
+    "Gift wrap কত টাকা?",
+    "Bulk order এ কত discount?"
 ]
 
-
-
 for q in questions:
-    if q.strip():
-        print(f"❓ প্রশ্ন: {q}")
-    if q.strip()=="quit":
-        break
     ask_question(q)
-
-while True:
-    user_input = input("তুমি: ")
-    
-    if user_input.lower() == "quit":
-        print("Chatbot বন্ধ হচ্ছে! আল্লাহ হাফেজ 👋")
-        break
-    
-    if user_input == "":
-        print("কিছু লেখো!")
-        continue
-    
-    response = client.messages.create(
-        model="claude-haiku-4-5-20251001",
-        max_tokens=1024,
-        messages=[
-            {"role": "user", "content": user_input}
-        ]
-    )
-    
-    print(f"AI: {response.content[0].text}")
-    print("-" * 40)
    
     

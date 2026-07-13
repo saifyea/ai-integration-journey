@@ -35,7 +35,7 @@ def build_vectorstore():
 
     # Step 3 — Vector Store
    
-    vectorstore = vectorstore = FAISS.from_documents(chunks, embeddings)
+    vectorstore = FAISS.from_documents(chunks, embeddings)
 
      # ✅ Disk এ Save করো
     vectorstore.save_local(VECTOR_STORE_PATH)
