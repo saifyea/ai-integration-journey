@@ -1,3 +1,4 @@
+#Library Import
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes,ConversationHandler
 from anthropic import Anthropic
@@ -7,7 +8,7 @@ from datetime import datetime
 import os
 
 
-
+#configuration Setup
 load_dotenv()
 
 # Clients
@@ -166,28 +167,26 @@ async def order_cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # ✅ /start command
 async def start(update:Update,context:ContextTypes.DEFAULT_TYPE):
     user_name=update.effective_user.first_name #user name collect করবে telegram থেকে
-    user_id = update.effective_user.id  # ইউজারের ইউনিক আইডি  collect করবে telegram থেকে
     await update.message.reply_text(
         f"🛍️ আস্সালামু আলাইকুম {user_name}!\n\n"
         f"আমি Saif's Kids Store এর AI Assistant।\n\n"
         f"আপনি জিজ্ঞেস করতে পারেন:\n"
         f"• Product এর দাম\n"
         f"• Delivery সময়\n"
-        f"• Return policy\n\n"
+        f"• Store পলিসি\n\n"
         f"Commands:\n"
         f"/products — সব products দেখুন\n"
         f"/price — product এর দাম\n"
         f"/delivery — Delivery এর সময়\n"
-        f"/policy - Store Policy"
+        f"/policy - Store Policy\n"
         f"/clear — চ্যাট মেমোরি মুছুন\n"
-        f"/cancelOrder — আপনাার order বাতিল করতে\n"
         f"/help — সাহায্য"
         
     ) 
 
 # ✅ /clear command
 async def clear_memory(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_id = update.effective_user.id
+    user_id = update.effective_user.id # ইউজারের ইউনিক আইডি  collect করবে telegram থেকে
     chat_histories[user_id] = []
     await update.message.reply_text("🧹 আপনার সাথে আগের সব আলাপচারিতার স্মৃতি মুছে ফেলা হয়েছে!")
 
@@ -220,7 +219,7 @@ async def help_command(update:Update, context:ContextTypes.DEFAULT_TYPE):
         "/delivery — product এর delivery সময়\n"
         "/policy — Sotre এর Policy\n"
         "/clear — চ্যাট মেমোরি মুছুন\n"
-        "/cancelOrder — আপনাার order বাতিল করতে\n"
+       # "/cancelOrder — আপনাার order বাতিল করতে\n"
         "/help — সাহায্য"
     )
 
@@ -417,7 +416,7 @@ def main():
     app.add_handler(CommandHandler("price", price))
     app.add_handler(CommandHandler("delivery", delivery))
     app.add_handler(CommandHandler("clear",clear_memory))
-    app.add_handler(CommandHandler("orderCancel",order_cancel))
+    #app.add_handler(CommandHandler("orderCancel",order_cancel))
     app.add_handler(CommandHandler("policy",policy))
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(MessageHandler(
