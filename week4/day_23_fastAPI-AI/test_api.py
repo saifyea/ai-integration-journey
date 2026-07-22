@@ -28,8 +28,28 @@ print(r.json())
 # Test 5 — Generate
 print("\n5. Generate Content:")
 r = requests.post(f"{BASE_URL}/generate", json={
-    "product_name": "Flash Cards",
+    "name": "Flash Cards",
     "price": 250,
     "target": "৩-৬ বছরের শিশু"
+})
+print(r.json())
+
+
+# Test 6 — create product
+print("\n6. Adding a new product:")
+r = requests.post(f"{BASE_URL}/products", json={
+    "name": "Toy Car",
+    "price": 550,
+    "age": "৩-৬ বছর",
+})
+print(r.json())
+print("-" * 50)
+
+
+# Test 7 — Price Check
+print("\n7. Checking Price - Flash Cards (250):")
+r = requests.post(f"{BASE_URL}/price-check", json={
+    "product_name": "Flash Cards",
+    "my_price": 200
 })
 print(r.json())

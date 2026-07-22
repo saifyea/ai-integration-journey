@@ -37,6 +37,10 @@ class ProductCreate(BaseModel):
     price: int
     age: str
 
+class PriceCheckRequest(BaseModel):
+    product_name: str
+    my_price:int
+
 
 # ✅ Endpoints
 @app.get("/health")
@@ -75,8 +79,6 @@ def get_product(product_id: int):
         if product["id"] == product_id:
             return product
     return {"error": "Product পাওয়া যায়নি!"}
-
-
 
 
 @app.post("/chat")
@@ -153,3 +155,38 @@ def create_product(request:ProductCreate):
         "message": f"✅ '{request.name}' প্রোডাক্টটি যোগ করা হয়েছে!",
         "product": new_product
     }
+
+
+@app.post("/price-check")
+def price_check(request: PriceCheckRequest):
+    try:
+        response = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=300,
+            system="তুমি Bangladesh e-commerce pricing expert। বাংলায় practical advice দাও।",
+            messages=[{
+                "role": "user",
+                "content": f"""
+                Product: {request.product_name}
+                আমার দাম: {request.my_price} টাকা
+
+                Competitor দাম:
+                - Bangladesh Map Puzzle: ৪০০-৫০০ টাকা
+                - Magic Drawing Board: ৩০০-৪০০ টাকা
+                - Flash Cards: ২০০-৩০০ টাকা
+
+                বলো:
+                1. আমার দাম ঠিক আছে?
+                2. বেশি নাকি কম?
+                3. Suggestion কী?
+                """
+            }]
+        )
+        return {
+            "product": request.product_name,
+            "my_price": request.my_price,
+            "analysis": response.content[0].text
+        }
+    except Exception as e:
+        return {"error": str(e)}
+    
