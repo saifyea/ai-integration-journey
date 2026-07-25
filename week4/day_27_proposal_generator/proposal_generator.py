@@ -1,5 +1,5 @@
 import streamlit as st
-from antrhopic import Anthropic
+from anthropic import Anthropic
 from dotenv import load_dotenv
 import os
 
@@ -7,9 +7,9 @@ load_dotenv()
 try:
     api_key=st.secrets["ANTHROPIC_API_KEY"]
 except:
-    api_kay=os.getenv("ANTHROPIC_API_KEY")
+    api_key=os.getenv("ANTHROPIC_API_KEY")
 
-client=Anthropic(api_kay=api_kay)
+client=Anthropic(api_key=api_key)
 
 st.set_page_config(
     page_title="Proposal Generator",
@@ -132,7 +132,7 @@ if st.button("🚀 Proposal Generate করো!", type="primary"):
                     data=proposal,
                     file_name=f"proposal_{job_title[:20]}.txt",
                     mime="text/plain",
-                    user_container_width=True
+                    use_container_width=True
                 )
 st.divider()
 

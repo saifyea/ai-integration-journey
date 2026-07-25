@@ -2,7 +2,7 @@ import streamlit as st
 
 # Page Config
 st.set_page_config(
-    page_title="Saifuddin — AI Portfolio",
+    page_title="Saifuddin Yeahea | AI Integration Specialist",
     page_icon="🤖",
     layout="wide"
 )
@@ -33,6 +33,9 @@ st.markdown("""
     margin: 4px;
     display: inline-block;
 }
+[data-testid="stSidebar"] {
+    display: none;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -41,9 +44,9 @@ st.markdown('<p class="hero-title">Saifuddin Yeahea</p>',
             unsafe_allow_html=True)
 st.markdown("### 🤖 IT Manager → AI Integration Specialist")
 st.markdown("**17+ years RMG Sector** | **Python • LangChain • RAG • AI Agents**")
-st.markdown("I help businesses build AI-powered chatbots, RAG systems, automation tools and deploy them as production-ready applications.")
+st.markdown("I build AI-powered chatbots, RAG systems and business automation tools that are ready for production deployment.")
 st.markdown("")
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 with col1:
     st.link_button(
         "🔗 GitHub",
@@ -56,7 +59,13 @@ with col2:
     )
 with col3:
     st.link_button(
-        "🤖 Live Demo",
+        "📸 Application Preview",
+        "https://ai-store-dashboard.streamlit.app/"
+    )
+
+with col4:
+    st.link_button(
+        "📄 Download Resume",
         "https://ai-store-dashboard.streamlit.app/"
     )
 
@@ -78,6 +87,70 @@ s4.metric("Lines of Code", "2000+")
 
 st.divider()
 
+st.markdown("# ⭐ Featured Project")
+
+left, right = st.columns([40,60])
+
+with left:
+    from pathlib import Path
+
+    BASE_DIR = Path(__file__).parent
+    
+    image_path = BASE_DIR / "assets" / "ai-chat.png"
+
+    st.image(image_path, use_container_width=True)
+    st.caption("Live AI Store Assistant built with Claude AI + LangChain")
+
+with right:
+    with st.container(border=True):
+
+        st.subheader("🛍 Complete AI Suite")
+        st.success("🚀 Production Ready")
+
+        st.write(
+            """
+    An all-in-one AI business dashboard that combines Product Content Generation,
+    Customer Support Chatbot, RAG Knowledge Base and AI Agent into a single application.
+            """
+        )
+
+
+        st.markdown(
+            """
+            **Key Features:**
+            
+            💬 AI Customer Support &emsp;&emsp;&emsp;&emsp;📝 AI Content Generator
+            
+            🔍 RAG Knowledge Base &emsp;&emsp;&emsp;&emsp; 🤖 AI Agent with Memory
+
+            ⚡ Claude AI Integration &emsp;&emsp;&emsp;&emsp;🌐 Streamlit Dashboard
+
+            """
+        )
+
+        st.markdown("**Tech Stack**&#8594;&emsp;&emsp;`Python` `Claude AI` `LangChain` `Streamlit` `FAISS` `HuggingFace`")
+        st.markdown("**Architecture:** User → Streamlit → LangChain → FAISS → Claude AI → Response")
+
+
+        c1, c2 = st.columns(2)
+
+        with c1:
+            st.link_button(
+                "📸 Application Preview",
+                "https://ai-store-dashboard.streamlit.app/",
+                use_container_width=True,
+            )
+
+        with c2:
+            st.link_button(
+                "💻 GitHub",
+                "https://github.com/saifyea/ai-integration-journey",
+                use_container_width=True,
+            )
+    
+
+
+st.divider()
 # ✅ Projects
 st.markdown("## 🛠️ Projects")
 
@@ -185,29 +258,30 @@ skill_col1, skill_col2, skill_col3 = st.columns(3)
 
 with skill_col1:
     st.markdown("**🤖 AI & LLM**")
-    st.markdown(":green-badge[Claude AI] :green-badge[LangChain] :green-badge[RAG]" )
-    st.markdown(":green-badge[AI Agents] :green-badge[Prompt Engineering] :green-badge[HuggingFace]")
+    st.markdown(":green-badge[Claude AI]&nbsp;&nbsp; :green-badge[LangChain]&nbsp;&nbsp; :green-badge[RAG]" )
+    st.markdown(":green-badge[AI Agents]&nbsp;&nbsp; :green-badge[Prompt Engineering] &nbsp;&nbsp;:green-badge[HuggingFace]")
 
 with skill_col2:
     st.markdown("**🐍 Development**")
-    st.markdown(":green-badge[Python] :green-badge[FastAPI] :green-badge[Streamlit]" )
-    st.markdown(":green-badge[REST API] :green-badge[BeautifulSoup] :green-badge[Telegram Bot]")
+    st.markdown(":green-badge[Python] &nbsp;&nbsp; :green-badge[FastAPI] &nbsp;&nbsp;:green-badge[Streamlit]" )
+    st.markdown(":green-badge[REST API] &nbsp;&nbsp;:green-badge[BeautifulSoup]&nbsp;&nbsp; :green-badge[Telegram Bot]")
 
 with skill_col3:
     st.markdown("**🗄 Data & Infrastructure**")
-    st.markdown(":green-badge[QL Server] :green-badge[FAISS] :green-badge[Git]:green-badge[GitHub]" )
-    st.markdown(" :green-badge[ERP Systems] :green-badge[Network Design]:green-badge[Active Directory]")
+    st.markdown(":green-badge[QL Server]&nbsp;&nbsp; :green-badge[FAISS] &nbsp;&nbsp;:green-badge[Git]&nbsp;&nbsp;:green-badge[GitHub]" )
+    st.markdown(" :green-badge[ERP Systems] &nbsp;&nbsp;:green-badge[Network Design]&nbsp;&nbsp;:green-badge[Active Directory]")
     #st.markdown(":green-badge[Active Directory] ")
 
 
 st.divider()
 # ✅ Contact
-st.markdown("## 📬 Let's Build Something Together")
+st.markdown("## 📬 Let's ***Build Something Together***")
 
 st.write(
     """
-Have an AI automation idea, chatbot requirement,
-or RAG system project?
+Have an AI project?
+Need a chatbot?
+Want to automate a business process?
 
 I'm open to:
 - 🤖 AI Integration Projects
@@ -215,6 +289,9 @@ I'm open to:
 - 🔍 RAG Applications
 - ⚡ Business Automation
 - 🏭 RMG Sector AI Solutions
+
+
+
 """
 )
 
@@ -258,18 +335,8 @@ with st.form("contact_form"):
 
 
 st.divider()
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.markdown("**© 2026 Saifuddin Yeahea**")  
-
-with col2:
-    st.markdown("**Built with Python • Streamlit • Claude AI**")
-    
-with col3:
-    st.markdown("**Always Learning • Always Building 🚀**")
-   
+st.markdown("**© 2026 Saifuddin Yeahea**") 
+st.markdown("Built with Python • Streamlit • Claude AI") 
 
 
 
