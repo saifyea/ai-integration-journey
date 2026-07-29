@@ -115,8 +115,7 @@ if st.button("🚀 Proposal Generate করো!", type="primary"):
                     1. Client এর problem বোঝে
                     2. আমার experience relevant করে দেখায়
                     3. Portfolio mention করে
-                    4. Next step clear করে"""
-                    
+                    4. Next step clear করে"""  
                 }]
             )
 
