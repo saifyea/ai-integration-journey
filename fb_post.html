@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>NestGadget BD – Teaser Post 1</title>
+<style>.card {
+  width: 1080px;
+  height: 1920px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  background: #060d1f;
+  font-family: Arial, "Noto Sans Bengali", sans-serif;
+  color: #fff;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.bg-grad {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse at 70% 42%,
+      #0d2040 0%,
+      #060d1f 58%
+    );
+}
+
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 44px,
+      rgba(99,179,237,0.03) 44px,
+      rgba(99,179,237,0.03) 45px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 44px,
+      rgba(99,179,237,0.03) 44px,
+      rgba(99,179,237,0.03) 45px
+    );
+}
+
+/* Main center glow */
+.glow-main {
+  position: absolute;
+  width: 850px;
+  height: 850px;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(66,153,225,0.20) 0%,
+      transparent 65%
+    );
+  right: -260px;
+  top: 43%;
+  transform: translateY(-50%);
+}
+
+/* Upper-left glow */
+.glow-left {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(99,179,237,0.09) 0%,
+      transparent 70%
+    );
+  left: -120px;
+  top: -100px;
+}
+
+/* Bottom glow */
+.glow-bottom {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(66,153,225,0.07) 0%,
+      transparent 70%
+    );
+  left: 50%;
+  bottom: -300px;
+  transform: translateX(-50%);
+}
+
+/* =========================
+   BANGLADESH FLAG STRIP
+========================= */
+
+.flag-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 7px;
+  height: 100%;
+  background:
+    linear-gradient(
+      to bottom,
+      #006a4e 50%,
+      #f42a41 50%
+    );
+  opacity: 0.85;
+}
+
+/* =========================
+   BRAND
+========================= */
+
+.brand-tag {
+  position: absolute;
+  top: 55px;
+  left: 55px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  z-index: 5;
+}
+
+.brand-logo {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 10px;
+
+  background: rgba(99,179,237,0.12);
+  border: 1px solid rgba(99,179,237,0.25);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 21px;
+}
+
+.brand-label {
+  font-size: 16px;
+  font-weight: 700;
+
+  color: rgba(255,255,255,0.6);
+
+  letter-spacing: 1.5px;
+}
+
+/* =========================
+   DOT MATRIX
+========================= */
+
+.dot-matrix {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+
+  z-index: 2;
+  opacity: 0.18;
+
+  font-size: 16px;
+  line-height: 14px;
+  letter-spacing: 4px;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.main-content {
+  position: absolute;
+
+  left: 55px;
+  right: 55px;
+  top: 205px;
+
+  z-index: 4;
+
+  text-align: center;
+}
+
+/* Coming badge */
+
+.coming-badge {
+  display: inline-block;
+
+  background: rgba(99,179,237,0.12);
+  border: 1px solid rgba(99,179,237,0.3);
+
+  border-radius: 100px;
+
+  padding: 8px 22px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  color: rgba(99,179,237,0.9);
+
+  text-transform: uppercase;
+
+  margin-bottom: 22px;
+}
+
+/* =========================
+   HEADLINE
+========================= */
+
+.headline {
+  font-size: 72px;
+
+  font-weight: 900;
+
+  line-height: 1.05;
+
+  letter-spacing: -2px;
+
+  margin: 0 0 18px;
+}
+
+.headline .line1 {
+  display: block;
+
+  color: rgba(255,255,255,0.94);
+}
+
+.headline .line2 {
+  display: block;
+
+  background:
+    linear-gradient(
+      135deg,
+      #63b3ed,
+      #4299e1
+    );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+}
+
+/* =========================
+   SUB TEXT
+========================= */
+
+.sub-text {
+  font-size: 21px;
+
+  color: rgba(255,255,255,0.42);
+
+  line-height: 1.55;
+
+  margin: 0 auto;
+
+  max-width: 850px;
+}
+
+.sub-text strong {
+  color: rgba(99,179,237,0.85);
+
+  font-weight: 600;
+}
+
+/* =========================
+   MYSTERY PRODUCT
+========================= */
+
+.right-visual {
+  position: absolute;
+
+  top: 665px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  z-index: 4;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 18px;
+}
+
+/* Mystery box */
+
+.mystery-box {
+  width: 390px;
+  height: 470px;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+/* Outer ring */
+
+.ring {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 30px;
+
+  border: 1.5px solid rgba(99,179,237,0.22);
+
+  box-shadow:
+    0 0 40px rgba(66,153,225,0.04);
+}
+
+/* Inner ring */
+
+.ring-inner {
+  position: absolute;
+
+  inset: 20px;
+
+  border-radius: 24px;
+
+  border: 1px dashed rgba(99,179,237,0.16);
+}
+
+/* Product silhouette */
+
+.product-blur {
+  width: 250px;
+  height: 365px;
+
+  background:
+    linear-gradient(
+      160deg,
+      rgba(99,179,237,0.27) 0%,
+      rgba(66,153,225,0.10) 100%
+    );
+
+  border-radius: 28px;
+
+  filter: blur(15px);
+
+  position: relative;
+
+  box-shadow:
+    0 0 80px rgba(66,153,225,0.12);
+}
+
+/* Question mark */
+
+.qmark {
+  position: absolute;
+
+  font-size: 145px;
+
+  font-weight: 900;
+
+  color: rgba(255,255,255,0.08);
+
+  z-index: 2;
+
+  letter-spacing: -6px;
+}
+
+/* Scan lines */
+
+.scan {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 30px;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 10px,
+      rgba(99,179,237,0.035) 10px,
+      rgba(99,179,237,0.035) 11px
+    );
+}
+
+/* =========================
+   CORNER BRACKETS
+========================= */
+
+.bracket {
+  position: absolute;
+
+  width: 34px;
+  height: 34px;
+}
+
+.bracket-tl {
+  top: 10px;
+  left: 10px;
+
+  border-top:
+    2px solid rgba(99,179,237,0.55);
+
+  border-left:
+    2px solid rgba(99,179,237,0.55);
+}
+
+.bracket-tr {
+  top: 10px;
+  right: 10px;
+
+  border-top:
+    2px solid rgba(99,179,237,0.55);
+
+  border-right:
+    2px solid rgba(99,179,237,0.55);
+}
+
+.bracket-bl {
+  bottom: 10px;
+  left: 10px;
+
+  border-bottom:
+    2px solid rgba(99,179,237,0.55);
+
+  border-left:
+    2px solid rgba(99,179,237,0.55);
+}
+
+.bracket-br {
+  bottom: 10px;
+  right: 10px;
+
+  border-bottom:
+    2px solid rgba(99,179,237,0.55);
+
+  border-right:
+    2px solid rgba(99,179,237,0.55);
+}
+
+/* =========================
+   REVEAL LABEL
+========================= */
+
+.reveal-label {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(66,153,225,0.15),
+      rgba(99,179,237,0.10)
+    );
+
+  border: 1px solid rgba(99,179,237,0.22);
+
+  border-radius: 10px;
+
+  padding: 13px 30px;
+
+  min-width: 380px;
+
+  text-align: center;
+
+  box-shadow:
+    0 0 25px rgba(66,153,225,0.04);
+}
+
+.reveal-main {
+  font-size: 16px;
+
+  font-weight: 700;
+
+  color: #e0f0ff;
+
+  letter-spacing: 1px;
+}
+
+.reveal-sub {
+  font-size: 12px;
+
+  color: rgba(99,179,237,0.55);
+
+  margin-top: 3px;
+}
+
+/* =========================
+   COUNTDOWN DOTS
+========================= */
+
+.countdown-dots {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(99,179,237,0.4);
+}
+
+.dot.active {
+  background: #63b3ed;
+
+  box-shadow:
+    0 0 9px rgba(99,179,237,0.65);
+}
+
+/* =========================
+   ENGAGEMENT CTA
+========================= */
+
+.engage-box {
+  position: absolute;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  top: 1285px;
+
+  width: 100%;
+
+  z-index: 5;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 15px;
+}
+
+.engage-pill {
+  background:
+    rgba(99,179,237,0.10);
+
+  border:
+    1px solid rgba(99,179,237,0.27);
+
+  border-radius: 100px;
+
+  padding: 13px 26px;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  color: #e0f0ff;
+
+  box-shadow:
+    0 0 25px rgba(66,153,225,0.05);
+}
+
+.engage-arrow {
+  font-size: 24px;
+
+  color: rgba(99,179,237,0.55);
+
+  animation: pulse 2s infinite;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.story-footer {
+  position: absolute;
+
+  bottom: 460px;
+
+  left: 55px;
+  right: 55px;
+
+  text-align: center;
+
+  z-index: 5;
+}
+
+.footer-text {
+  font-size: 12px;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  color: rgba(255,255,255,0.25);
+}
+
+/* =========================
+   BOTTOM STRIP
+========================= */
+
+.bottom-strip {
+  position: absolute;
+
+  bottom: 0;
+
+  left: 0;
+  right: 0;
+
+  height: 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #4299e1,
+      #63b3ed,
+      #4299e1,
+      transparent
+    );
+
+  opacity: 0.6;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translateX(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(6px);
+  }
+}
+</style>
+</head>
+<body>
+
+<p class="hint">Teaser Post ১ — 1200×630px | F11 → Full Screen → Screenshot</p>
+<div class="card">
+
+  <div class="bg-grad"></div>
+  <div class="grid-bg"></div>
+
+  <div class="glow-main"></div>
+  <div class="glow-left"></div>
+  <div class="glow-bottom"></div>
+
+  <div class="flag-strip"></div>
+
+  <!-- BRAND -->
+   <div class="brand-tag">
+    <div class="brand-logo">🏠</div>
+    <span class="brand-label">NestGadget BD</span>
+  </div>
+
+
+ 
+
+  <!-- TOP RIGHT DECORATION -->
+  <div class="dot-matrix">
+    • • •<br>
+    • • •<br>
+    • • •
+  </div>
+
+
+  <!-- MAIN TEXT -->
+  <div class="main-content">
+
+    <div class="coming-badge">
+      SOMETHING NEW IS COMING
+    </div>
+
+    <h1 class="headline">
+      <span class="line1">বাংলাদেশে</span>
+      <span class="line2">প্রথমবার! 🇧🇩</span>
+    </h1>
+
+    <p class="sub-text">
+      এমন কিছু আসছে যা এখন পর্যন্ত<br>
+      বাংলাদেশের <strong>কোনো অনলাইন শপে নেই।</strong><br>
+      আপনি কি আন্দাজ করতে পারবেন? 👀
+    </p>
+
+  </div>
+
+
+  <!-- MYSTERY PRODUCT -->
+  <div class="right-visual">
+
+    <div class="mystery-box">
+
+      <div class="ring"></div>
+      <div class="ring-inner"></div>
+
+      <div class="product-blur"></div>
+
+      <div class="qmark">?</div>
+
+      <div class="scan"></div>
+
+      <div class="bracket bracket-tl"></div>
+      <div class="bracket bracket-tr"></div>
+      <div class="bracket bracket-bl"></div>
+      <div class="bracket bracket-br"></div>
+
+    </div>
+
+    <!-- REVEAL -->
+    <div class="reveal-label">
+
+      <div class="reveal-main">
+        🔓 Reveal আসছে শীঘ্রই
+      </div>
+
+      <div class="reveal-sub">
+        Page Follow করুন, মিস করবেন না!
+      </div>
+
+      <div class="countdown-dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- CTA -->
+  <div class="engage-box">
+    <div class="engage-pill">
+      💬 Comment করুন — কী হতে পারে?
+    </div>
+
+    <span class="engage-arrow">→</span>
+  </div>
+
+
+  <!-- FOOTER -->
+  <div class="story-footer">
+    <div class="footer-text">
+      Stay tuned · Follow for the reveal
+    </div>
+  </div>
+
+
+  <div class="bottom-strip"></div>
+
+</div>
+
+<p class="hint">F11 → Full Screen → Screenshot → Facebook Post এ Upload করুন</p>
+
+</body>
+</html>

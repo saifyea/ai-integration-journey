@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt Engineering Roadmap</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Noto Sans Bengali', sans-serif;
+        background: #e9eef5;
+        padding: 40px 20px;
+        color: #172033;
+    }
+
+    .poster {
+        width: 1080px;
+        max-width: 100%;
+        margin: auto;
+        background: linear-gradient(145deg, #ffffff, #f5f9ff);
+        border-radius: 30px;
+        padding: 55px;
+        box-shadow: 0 25px 70px rgba(20, 40, 80, 0.15);
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Decorative circles */
+    .poster::before {
+        content: "";
+        position: absolute;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: rgba(10, 102, 194, 0.08);
+        top: -100px;
+        right: -80px;
+    }
+
+    .poster::after {
+        content: "";
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: rgba(0, 166, 81, 0.07);
+        bottom: -70px;
+        left: -60px;
+    }
+
+    .header {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        margin-bottom: 45px;
+    }
+
+    .badge {
+        display: inline-block;
+        background: #e7f1ff;
+        color: #0a66c2;
+        padding: 8px 18px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 18px;
+    }
+
+    .header h1 {
+        font-size: 48px;
+        line-height: 1.2;
+        font-weight: 800;
+        color: #101828;
+        margin-bottom: 15px;
+    }
+
+    .header h1 span {
+        color: #0a66c2;
+    }
+
+    .header p {
+        font-size: 20px;
+        color: #667085;
+    }
+
+    .formula {
+        position: relative;
+        z-index: 2;
+        background: #101828;
+        color: white;
+        padding: 20px 25px;
+        border-radius: 18px;
+        text-align: center;
+        margin-bottom: 35px;
+        font-size: 21px;
+        font-weight: 600;
+        box-shadow: 0 12px 25px rgba(16, 24, 40, 0.15);
+    }
+
+    .formula span {
+        color: #63b3ff;
+        margin: 0 6px;
+    }
+
+    .grid {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+    }
+
+    .card {
+        background: white;
+        border: 1px solid #e4e7ec;
+        border-radius: 20px;
+        padding: 25px;
+        display: flex;
+        gap: 18px;
+        min-height: 190px;
+        transition: 0.3s;
+        box-shadow: 0 8px 22px rgba(16, 24, 40, 0.06);
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(16, 24, 40, 0.12);
+    }
+
+    .number {
+        min-width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #0a66c2, #2689e8);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 19px;
+        font-weight: 800;
+    }
+
+    .content h2 {
+        font-size: 22px;
+        margin-bottom: 8px;
+        color: #101828;
+    }
+
+    .content p {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #667085;
+        margin-bottom: 10px;
+    }
+
+    .example {
+        background: #f2f8ff;
+        border-left: 3px solid #0a66c2;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        color: #344054;
+    }
+
+    .bottom {
+        position: relative;
+        z-index: 2;
+        margin-top: 35px;
+        padding: 25px;
+        background: linear-gradient(135deg, #0a66c2, #004182);
+        border-radius: 20px;
+        color: white;
+        text-align: center;
+    }
+
+    .bottom h3 {
+        font-size: 25px;
+        margin-bottom: 8px;
+    }
+
+    .bottom p {
+        font-size: 17px;
+        opacity: 0.9;
+    }
+
+    .footer {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        margin-top: 25px;
+        color: #98a2b3;
+        font-size: 14px;
+    }
+
+    @media (max-width: 700px) {
+        body {
+            padding: 15px;
+        }
+
+        .poster {
+            padding: 30px 20px;
+        }
+
+        .header h1 {
+            font-size: 34px;
+        }
+
+        .header p {
+            font-size: 16px;
+        }
+
+        .grid {
+            grid-template-columns: 1fr;
+        }
+
+        .formula {
+            font-size: 16px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="poster">
+
+    <div class="header">
+        <div class="badge">🤖 AI • Prompt Engineering</div>
+
+        <h1>
+            Prompt Engineering-এর <span>৮টি গুরুত্বপূর্ণ অংশ</span>
+        </h1>
+
+        <p>
+            ভালো Prompt = ভালো AI Output
+        </p>
+    </div>
+
+    <div class="formula">
+        Role <span>+</span> Task <span>+</span> Context <span>+</span>
+        Input <span>+</span> Constraints <span>+</span> Format <span>+</span>
+        Examples <span>+</span> Evaluation
+    </div>
+
+    <div class="grid">
+
+        <!-- 01 -->
+        <div class="card">
+            <div class="number">01</div>
+            <div class="content">
+                <h2>🎭 Role / Persona</h2>
+                <p>
+                    AI-কে কোন ভূমিকা পালন করতে হবে তা নির্ধারণ করুন।
+                </p>
+                <div class="example">
+                    উদাহরণ: “তুমি একজন অভিজ্ঞ Marketing Expert।”
+                </div>
+            </div>
+        </div>
+
+        <!-- 02 -->
+        <div class="card">
+            <div class="number">02</div>
+            <div class="content">
+                <h2>🎯 Task / Instruction</h2>
+                <p>
+                    AI-কে ঠিক কী কাজ করতে হবে তা পরিষ্কারভাবে বলুন।
+                </p>
+                <div class="example">
+                    উদাহরণ: “একটি LinkedIn Post লিখো।”
+                </div>
+            </div>
+        </div>
+
+        <!-- 03 -->
+        <div class="card">
+            <div class="number">03</div>
+            <div class="content">
+                <h2>📚 Context</h2>
+                <p>
+                    প্রয়োজনীয় Background ও পরিস্থিতির তথ্য দিন।
+                </p>
+                <div class="example">
+                    উদাহরণ: “Target Audience হলো তরুণ উদ্যোক্তা।”
+                </div>
+            </div>
+        </div>
+
+        <!-- 04 -->
+        <div class="card">
+            <div class="number">04</div>
+            <div class="content">
+                <h2>📥 Input / Data</h2>
+                <p>
+                    AI যে তথ্যের ওপর কাজ করবে সেটি প্রদান করুন।
+                </p>
+                <div class="example">
+                    উদাহরণ: Text, Data, Document বা প্রশ্ন।
+                </div>
+            </div>
+        </div>
+
+        <!-- 05 -->
+        <div class="card">
+            <div class="number">05</div>
+            <div class="content">
+                <h2>📏 Constraints</h2>
+                <p>
+                    কী কী নিয়ম বা সীমাবদ্ধতা মেনে চলতে হবে তা নির্ধারণ করুন।
+                </p>
+                <div class="example">
+                    উদাহরণ: “১৫০ শব্দের মধ্যে লিখবে।”
+                </div>
+            </div>
+        </div>
+
+        <!-- 06 -->
+        <div class="card">
+            <div class="number">06</div>
+            <div class="content">
+                <h2>📋 Output Format</h2>
+                <p>
+                    উত্তরটি কোন Format-এ চান তা নির্দিষ্ট করে দিন।
+                </p>
+                <div class="example">
+                    উদাহরণ: Table, Bullet, JSON বা Step-by-Step।
+                </div>
+            </div>
+        </div>
+
+        <!-- 07 -->
+        <div class="card">
+            <div class="number">07</div>
+            <div class="content">
+                <h2>💡 Examples</h2>
+                <p>
+                    কাঙ্ক্ষিত Output-এর একটি বা একাধিক নমুনা দিন।
+                </p>
+                <div class="example">
+                    উদাহরণ: “এই Sample-এর মতো উত্তর দাও।”
+                </div>
+            </div>
+        </div>
+
+        <!-- 08 -->
+        <div class="card">
+            <div class="number">08</div>
+            <div class="content">
+                <h2>✅ Evaluation</h2>
+                <p>
+                    একটি ভালো উত্তর কেমন হবে তার Quality Criteria দিন।
+                </p>
+                <div class="example">
+                    উদাহরণ: “নির্ভুল, সহজ ও ব্যবহারিক হতে হবে।”
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bottom">
+        <h3>🚀 Master the Prompt, Master the AI!</h3>
+        <p>
+            যত পরিষ্কার Prompt → তত ভালো এবং নির্ভুল AI Output
+        </p>
+    </div>
+
+    <div class="footer">
+        #PromptEngineering &nbsp; #AI &nbsp; #ChatGPT &nbsp; #ArtificialIntelligence
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -50,7 +50,10 @@ with st.sidebar:
     
     
     uploaded_files = st.file_uploader(
-            "PDF/TXT ফাইল আপলোড করুন", type=["pdf","txt"], accept_multiple_files=True,max_upload_size=10
+            "PDF/TXT ফাইল আপলোড করুন", 
+            type=["pdf","txt"], 
+            accept_multiple_files=True,
+            max_upload_size=10
             )
     # ফাইল আপলোডের সময় সাইজ চেক করুন
     MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB

@@ -37,3 +37,7 @@ Day 23 — FastAPI + AI!
 python -m pip install fastapi
 python -m pip install uvicorn
 python -m pip install python-multipart
+
+
+to remobe chroma db
+Remove-Item -Recurse -Force chroma_db

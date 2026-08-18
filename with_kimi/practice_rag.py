@@ -6,6 +6,8 @@ from langchain_anthropic import ChatAnthropic
 from dotenv import load_dotenv
 from anthropic import Anthropic
 import os
+from langchain.agents import create_agent
+from langchain_core.tools import tool
 
 load_dotenv()
 
@@ -30,7 +32,16 @@ model=ChatAnthropic(
     model="claude-haiku-4-5-20251001",
     api_key=os.getenv("ANTHROPIC_API_KEY")
 )
+def calculator(name:str,price:int)->str:
 
+    return calculator("flash card",450)
+tools=[calculator]
+agent=create_agent(
+    model=model,
+    tools=tools,
+    system_prompt="""তুমি বাংলায় উত্তর দাও। সঠিক tool ব্যবহার করে প্রশ্নের উত্তর দাও।"""
+    
+)
 
 while True:
     user_input = input("\n❓ আপনার প্রশ্ন লিখুন (বা 'exit' লিখে বের হয়ে যান): ")
@@ -54,7 +65,7 @@ while True:
     উত্তর:"""
 
     try:
-        response = model.invoke(prompt)
+        response = agent.invoke(prompt)
         print(response.content)
     except Exception as e:
         print("Error:", e)
