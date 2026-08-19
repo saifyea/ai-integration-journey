@@ -16,6 +16,11 @@ SCOPES = [
     'https://www.googleapis.com/auth/gmail.send'
 ]
 
+flow = InstalledAppFlow.from_client_secrets_file(
+    'credentials.json',  # same folder এ থাকলে এটাই যথেষ্ট
+    SCOPES
+)
+
 def get_gmail_service():
     creds = None
 
@@ -85,3 +90,74 @@ def get_emails(service, max_results=5):
         })
 
     return emails
+
+def categorize_email(email):
+    response = client.messages.create(
+        model="claude-haiku-4-5-20251001",
+        max_tokens=100,
+        system="""Email categorize করো।
+শুধু একটা category দাও:
+ORDER, COMPLAINT, INQUIRY, SPAM, OTHER""",
+        messages=[{
+            "role": "user",
+            "content": f"""
+Subject: {email['subject']}
+From: {email['sender']}
+Body: {email['body'][:200]}
+
+Category:"""
+        }]
+    )
+    return response.content[0].text.strip()
+
+
+def generate_reply(email, category):
+    response = client.messages.create(
+        model="claude-haiku-4-5-20251001",
+        max_tokens=300,
+        system="""তুমি Saif's Kids Store এর customer service।
+Professional email reply লেখো।
+
+Store Info:
+- Products: Map Puzzle ৳450, Drawing Board ৳350, Flash Cards ৳250
+- Delivery: ঢাকায় ১-২ দিন, বাইরে ৩-৫ দিন
+- Return: ৭ দিন""",
+        messages=[{
+            "role": "user",
+            "content": f"""
+Email থেকে reply দাও:
+Subject: {email['subject']}
+From: {email['sender']}
+Body: {email['body'][:300]}
+Category: {category}
+
+Professional reply লেখো:"""
+        }]
+    )
+    return response.content[0].text
+
+
+# Main Program
+def main():
+    print("📧 Gmail AI Assistant চালু!")
+
+    service = get_gmail_service()
+    print("✅ Gmail connected!")
+
+    emails = get_emails(service, max_results=5)
+    print(f"✅ {len(emails)} emails found!")
+
+    for i, email in enumerate(emails, 1):
+        print(f"\n{'='*50}")
+        print(f"Email {i}:")
+        print(f"From: {email['sender']}")
+        print(f"Subject: {email['subject']}")
+
+        category = categorize_email(email)
+        print(f"Category: {category}")
+
+        if category in ["ORDER", "INQUIRY", "COMPLAINT"]:
+            reply = generate_reply(email, category)
+            print(f"\nAI Reply:\n{reply}")
+
+main()

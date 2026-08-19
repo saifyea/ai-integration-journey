@@ -3,4 +3,6 @@ __pycache__/
 *.pyc
 *.json
 *.txt
+credentials.json
+token.pickle
 
