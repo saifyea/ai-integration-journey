@@ -43,11 +43,12 @@ def get_gmail_service():
     return build('gmail', 'v1', credentials=creds)
 
 
-def get_emails(service, max_results=5):
+def get_emails(service, max_results=10):
     results = service.users().messages().list(
         userId='me',
         maxResults=max_results,
-        labelIds=['INBOX']
+        # ✅ no-reply বাদ দাও
+        q="NOT from:no-reply NOT from:noreply NOT from:notifications"
     ).execute()
 
     messages = results.get('messages', [])
@@ -70,17 +71,27 @@ def get_emails(service, max_results=5):
             if h['name'] == 'From':
                 sender = h['value']
 
+        # no-reply skip করো
+        if any(x in sender.lower() for x in
+               ['no-reply', 'noreply', 'notification']):
+            continue
+
         # Body বের করো
         body = ""
         if 'parts' in payload:
             for part in payload['parts']:
                 if part['mimeType'] == 'text/plain':
-                    data = part['body']['data']
-                    body = base64.urlsafe_b64decode(data).decode('utf-8')
+                    data = part['body'].get('data', '')
+                    if data:
+                        body = base64.urlsafe_b64decode(
+                            data
+                        ).decode('utf-8')
         elif 'body' in payload:
             data = payload['body'].get('data', '')
             if data:
-                body = base64.urlsafe_b64decode(data).decode('utf-8')
+                body = base64.urlsafe_b64decode(
+                    data
+                ).decode('utf-8')
 
         emails.append({
             'id': msg['id'],
@@ -89,6 +100,7 @@ def get_emails(service, max_results=5):
             'body': body[:500]
         })
 
+    print(f"✅ Real emails found: {len(emails)}")
     return emails
 
 def categorize_email(email):
