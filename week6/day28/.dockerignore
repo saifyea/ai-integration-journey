@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.pyc
+.git
+*.db
+vectorstore/
+chroma_db/
+token.pickle
+credentials.json
