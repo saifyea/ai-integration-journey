@@ -1,0 +1,12 @@
+anthropic
+streamlit
+python-dotenv
+requests
+pandas
+langchain
+langchain-anthropic
+langchain-community
+langchain-huggingface
+langchain-text-splitters
+faiss-cpu
+sentence-transformers
